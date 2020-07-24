@@ -81,11 +81,13 @@ class SortingRobot:
         Turn on the robot's light
         """
         self._light = "ON"
+
     def set_light_off(self):
         """
         Turn off the robot's light
         """
         self._light = "OFF"
+
     def light_is_on(self):
         """
         Returns True if the robot's light is on and False otherwise.
@@ -97,14 +99,103 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-        pass
+        # change light default from off to on
+        self.set_light_on()
+
+        # continue looping while light is on
+        while self.light_is_on():
+            # turn off until a successful swap occurs only then continue
+            self.set_light_off()
+
+            # continue right while we can go right
+            while self.can_move_right():
+                # swap with an item to prepare to compare with neighboring values
+                self.swap_item()
+                # move right to neighbor value
+                self.move_right()
+
+                # check if robot value is greater than neighbor value
+                if self.compare_item() == 1:
+                    # then swap
+                    self.swap_item()
+                    # move back left
+                    self.move_left()
+                    # pick up the none we left
+                    self.swap_item()
+                    # return to position + 1
+                    self.move_right()
+                    # successful swap was done
+                    self.set_light_on()
+                else:
+                    # pick up none we left behind no swap was needed
+                    self.move_left()
+                    self.swap_item()
+                    # return to position + 1
+                    self.move_right()
+
+            # bounce left while we can go left
+            while self.can_move_left():
+                # swap with an item to prepare to compare with neighboring values
+                self.swap_item()
+                # move left to neighbor value
+                self.move_left()
+
+                # check if robot value is less than neighbor value
+                if self.compare_item() == -1:
+                    # then swap
+                    self.swap_item()
+                    # move back right
+                    self.move_right()
+                    # pick up the none we left
+                    self.swap_item()
+                    # return to position + 1
+                    self.move_left()
+                    # successful swap was done
+                    self.set_light_on()
+                else:
+                    # pick up none we left behind no swap was needed
+                    self.move_right()
+                    self.swap_item()
+                    # return to position + 1
+                    self.move_left()
+
+        # self.set_light_on()
+        # # make a while loop (if light_is_on is true keep running loop)
+        # while self.light_is_on():
+        #     # set the light off using set_light_off method
+        #     self.set_light_off()
+
+        #     # make a for loop that starts at 0 and ends at length of self.list - 1
+        #     while:
+        #         # check if self.list[i] > self.list[i + 1]
+        #         # then use self.list[i].compare_item()
+        #         if self.compare_item() == 1 or self.compare_item() == None:
+        #             # then use self.list[i + 1].swap_item()
+        #             self.swap_item()
+        #             self.move_right()
+        #             # check if value is bigger with compare
+        #             if self.compare_item() == 1:
+        #                 # then swap
+        #                 self.swap_item()
+        #                 # now go back to pick up none
+        #                 self.move_left()
+        #                 self.move_right()
+        #                 # set the light on using set_light_on method
+        #                 self.set_light_on()
+
+        #         self.move_right()
+
+        # return self._list
 
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
     # with `python robot_sort.py`
 
-    l = [15, 41, 58, 49, 26, 4, 28, 8, 61, 60, 65, 21, 78, 14, 35, 90, 54, 5, 0, 87, 82, 96, 43, 92, 62, 97, 69, 94, 99, 93, 76, 47, 2, 88, 51, 40, 95, 6, 23, 81, 30, 19, 25, 91, 18, 68, 71, 9, 66, 1, 45, 33, 3, 72, 16, 85, 27, 59, 64, 39, 32, 24, 38, 84, 44, 80, 11, 73, 42, 20, 10, 29, 22, 98, 17, 48, 52, 67, 53, 74, 77, 37, 63, 31, 7, 75, 36, 89, 70, 34, 79, 83, 13, 57, 86, 12, 56, 50, 55, 46]
+    l = [5, 4, 3, 2, 1]
+
+    # l = [15, 41, 58, 49, 26, 4, 28, 8, 61, 60, 65, 21, 78, 14, 35, 90, 54, 5, 0, 87, 82, 96, 43, 92, 62, 97, 69, 94, 99, 93, 76, 47, 2, 88, 51, 40, 95, 6, 23, 81, 30, 19, 25, 91, 18, 68, 71, 9, 66, 1,
+    #      45, 33, 3, 72, 16, 85, 27, 59, 64, 39, 32, 24, 38, 84, 44, 80, 11, 73, 42, 20, 10, 29, 22, 98, 17, 48, 52, 67, 53, 74, 77, 37, 63, 31, 7, 75, 36, 89, 70, 34, 79, 83, 13, 57, 86, 12, 56, 50, 55, 46]
 
     robot = SortingRobot(l)
 
