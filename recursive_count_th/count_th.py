@@ -4,22 +4,25 @@ Your function should return a count of how many occurences of ***"th"*** occur w
 Your function must utilize recursion. It cannot contain any loops.
 '''
 
-# set up a list track th
-th_count = []
-
 
 def count_th(word):
-    # empty string, so return count
+    # check if word is empty strings
     if word == "":
-        return len(th_count)
+        # then return 0
+        return 0
 
-    # if "th" in word, then remove them
-    if "th" in word:
-        th_count.append(0)
-        new_word = word.replace("th", "0", 1)
-        return count_th(new_word)
-    # else return the count and clear list
-    else:
-        value = len(th_count)
-        th_count.clear()
-        return value
+    # check if word is not lowercase
+    if word.islower() == False:
+        # then return word.lower()
+        word = word.lower()
+
+    # check if arr[i] is equal to 't' and arr[i + 1] is equal to 'h'
+    if word[0] == 't' and word[1] == 'h':
+        # then return 1
+        return 1 + count_th(word[2:])
+
+    # return count_th(word)
+    return count_th(word[1:])
+
+
+print(count_th("abcthxyz"))

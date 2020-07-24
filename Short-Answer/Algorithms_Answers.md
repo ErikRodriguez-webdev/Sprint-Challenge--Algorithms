@@ -4,9 +4,9 @@
 
 a) The runtime for this while loop would have to be O(n). The reason why is because the condition above has 'a' less than 'n _ n _ n'. To me, that would be O(n^3) but then in the line below I see 'a' declared inside loop meaning it would increase while 'n' would stay the same. I decided to cancel 'n's and was left with one 'n'.
 
-b) The runtime for this while loop would have to be O(n^3). I arrived at this answer by giving the for loop a runtime of O(n) and the while loop a runtime of O(n^2). I add them up together to get o(n^3).
+b) The runtime for this for loop and nested while loop would have to be 0(n log n). I arrived at this answer by giving the for loop a runtime of O(n) and the while loop a runtime of O(log n) for j incrementing faster than O(n). I add them up together to get o(n log n).
 
-c) The runtime for this recursive function would have to be O(2^n). I gave this runtime because if bunnies argument passed in happens to be a negative value that would be best case scenario because this function seems to grow. However focusing on the worst case scenario if bunnies argument is a positive value and not zero it would pass the condition of not being zero and then add two to the bunnies and subtract 1, which means it would call the function again with a new value of bunnies plus one.
+c) The runtime for this recursive function would have to be O(n). Recursion works almost like a loop.
 
 ## Exercise II
 
