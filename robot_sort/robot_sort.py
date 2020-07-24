@@ -99,28 +99,93 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-
+        # change light default from off to on
         self.set_light_on()
 
-        # make a while loop (if light_is_on is true keep running loop)
+        # continue looping while light is on
         while self.light_is_on():
-            # set the light off using set_light_off method
+            # turn off until a successful swap occurs only then continue
             self.set_light_off()
 
-            # make a for loop that starts at 0 and ends at length of self.list - 1
-            for i in range(0, len(self._list) - 1):
-                # check if self.list[i] > self.list[i + 1]
-                if self._list[i] > self._list[i + 1]:
-                    # then use self.list[i].compare_item()
-                    self.compare_item()
-                    # then use self.list[i + 1].swap_item()
-                    self.swap_item()
-                    # set the light on using set_light_on method
-                    self.set_light_on()
-
+            # continue right while we can go right
+            while self.can_move_right():
+                # swap with an item to prepare to compare with neighboring values
+                self.swap_item()
+                # move right to neighbor value
                 self.move_right()
 
-        return self._list
+                # check if robot value is greater than neighbor value
+                if self.compare_item() == 1:
+                    # then swap
+                    self.swap_item()
+                    # move back left
+                    self.move_left()
+                    # pick up the none we left
+                    self.swap_item()
+                    # return to position + 1
+                    self.move_right()
+                    # successful swap was done
+                    self.set_light_on()
+                else:
+                    # pick up none we left behind no swap was needed
+                    self.move_left()
+                    self.swap_item()
+                    # return to position + 1
+                    self.move_right()
+
+            # bounce left while we can go left
+            while self.can_move_left():
+                # swap with an item to prepare to compare with neighboring values
+                self.swap_item()
+                # move left to neighbor value
+                self.move_left()
+
+                # check if robot value is less than neighbor value
+                if self.compare_item() == -1:
+                    # then swap
+                    self.swap_item()
+                    # move back right
+                    self.move_right()
+                    # pick up the none we left
+                    self.swap_item()
+                    # return to position + 1
+                    self.move_left()
+                    # successful swap was done
+                    self.set_light_on()
+                else:
+                    # pick up none we left behind no swap was needed
+                    self.move_right()
+                    self.swap_item()
+                    # return to position + 1
+                    self.move_left()
+
+        # self.set_light_on()
+        # # make a while loop (if light_is_on is true keep running loop)
+        # while self.light_is_on():
+        #     # set the light off using set_light_off method
+        #     self.set_light_off()
+
+        #     # make a for loop that starts at 0 and ends at length of self.list - 1
+        #     while:
+        #         # check if self.list[i] > self.list[i + 1]
+        #         # then use self.list[i].compare_item()
+        #         if self.compare_item() == 1 or self.compare_item() == None:
+        #             # then use self.list[i + 1].swap_item()
+        #             self.swap_item()
+        #             self.move_right()
+        #             # check if value is bigger with compare
+        #             if self.compare_item() == 1:
+        #                 # then swap
+        #                 self.swap_item()
+        #                 # now go back to pick up none
+        #                 self.move_left()
+        #                 self.move_right()
+        #                 # set the light on using set_light_on method
+        #                 self.set_light_on()
+
+        #         self.move_right()
+
+        # return self._list
 
 
 if __name__ == "__main__":
