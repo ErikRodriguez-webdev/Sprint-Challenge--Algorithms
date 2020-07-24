@@ -10,17 +10,4 @@ c) The runtime for this recursive function would have to be O(n). Recursion work
 
 ## Exercise II
 
-- I'm not sure how finding the floor where eggs begin to break can minimize that, we have plenty of eggs. I would need more information to fully solve this.
-
--Assuming n story building is an integer...
--Assuming eggs are in a list...
-
-eggs = [plenty]
-
-    -for loop (i) through all n story floors starting at 1 ending at n the length of building
-
-        -if i is current floor is less than f turning point of eggs starting to break:
-            -remove one egg from plenty and egg is currently dropped NOT BROKEN
-
-        -if i is current floor is greater than f turning point of eggs starting to break:
-            -remove one egg from plenty and egg is BROKEN
+Write out a binary search using iterative method. Using the n story building use a while loop to find the middle. Lowest being 0 and Highest being n story of building. Find the middle and if the egg does not break then we know we can cancel all floors before middle. Now we adjust lowest to one above old middle and find a new middle. We do this until we find the turning point floor where eggs begin to break.

@@ -12,17 +12,16 @@ def count_th(word):
         return 0
 
     # check if word is not lowercase
-    if word.islower() == False:
+    # if word.islower() == False:
         # then return word.lower()
-        word = word.lower()
+        # word = word.lower()
 
-    # check if arr[i] is equal to 't' and arr[i + 1] is equal to 'h'
-    if word[0] == 't' and word[1] == 'h':
-        # then return 1
-        return 1 + count_th(word[2:])
+    # check if length of word is not equal to one or less
+    if not len(word) <= 1:
+        # check if arr[i] is equal to 't' and arr[i + 1] is equal to 'h'
+        if word[0] == 't' and word[1] == 'h':
+            # then return 1
+            return 1 + count_th(word[2:])
 
     # return count_th(word)
     return count_th(word[1:])
-
-
-print(count_th("abcthxyz"))
